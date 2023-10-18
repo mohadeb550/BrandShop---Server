@@ -14,7 +14,7 @@ app.use(express.json())
 
 // mongoDB connection 
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.vn1kdxv.mongodb.net/?retryWrites=true&w=majority`;
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 
 const client = new MongoClient(uri, {
@@ -77,6 +77,57 @@ async function run() {
       const products = await asusCollection.find().toArray();
       res.send(products);
     })
+
+
+
+    
+
+    // get single product data from specific brand collection
+
+    app.get('/details/apple/:id', async (req, res)=> {
+      const productId = req.params;
+      const query = { _id : new ObjectId(productId)};
+      const foundProduct = await appleCollection.findOne(query);
+      res.send(foundProduct)
+    })
+
+    app.get('/details/xiaomi/:id', async (req, res)=> {
+      const productId = req.params;
+      const query = { _id : new ObjectId(productId)};
+      const foundProduct = await xiaomiCollection.findOne(query);
+      res.send(foundProduct)
+    })
+
+    app.get('/details/samsung/:id', async (req, res)=> {
+      const productId = req.params;
+      const query = { _id : new ObjectId(productId)};
+      const foundProduct = await samsungCollection.findOne(query);
+      res.send(foundProduct)
+    })
+
+    app.get('/details/sony/:id', async (req, res)=> {
+      const productId = req.params;
+      const query = { _id : new ObjectId(productId)};
+      const foundProduct = await sonyCollection.findOne(query);
+      res.send(foundProduct)
+    })
+
+    app.get('/details/google/:id', async (req, res)=> {
+      const productId = req.params;
+      const query = { _id : new ObjectId(productId)};
+      const foundProduct = await googleCollection.findOne(query);
+      res.send(foundProduct)
+    })
+
+    app.get('/details/asus/:id', async (req, res)=> {
+      const productId = req.params;
+      const query = { _id : new ObjectId(productId)};
+      const foundProduct = await asusCollection.findOne(query);
+      res.send(foundProduct)
+    })
+
+
+
 
     // create a new product on specific brand
 
