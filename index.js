@@ -33,6 +33,7 @@ async function run() {
     await client.connect();
 
     const companyCollection = client.db('companiesDB').collection('companyCollection');
+    const cartItems = client.db('cartDB').collection('cartItems');
 
   
     const brandsDB = client.db('brandsDB');
@@ -128,7 +129,6 @@ async function run() {
 
 
 
-
     // create a new product on specific brand
 
     app.post('/brand/apple', async (req, res) => {
@@ -167,6 +167,26 @@ async function run() {
       res.send(result);
     })
 
+    // products add in cart
+    app.post('/product', async (req, res) => {
+      const newProduct = req.body;
+      const result = await cartItems.insertOne(newProduct);
+      res.send(result)
+    })
+
+    // get all items in cartItems
+    app.get('/cart', async (req, res)=> {
+      const foundCartItems = await cartItems.find().toArray();
+      res.send(foundCartItems)
+    })
+
+    // delete single item from cart
+    app.delete('/item/:id', async (req, res) => {
+      const itemId = req.params;
+      const query = { _id : new ObjectId(itemId)};
+      const result = await cartItems.deleteOne(query);
+      res.send(result)
+    })
 
     
     // Send a ping to confirm a successful connection
