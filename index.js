@@ -188,6 +188,79 @@ async function run() {
       res.send(result)
     })
 
+    // update partially changes specific product
+
+    app.patch('/apple/:id', async (req, res) => {
+      const productId = req.params;
+      const newChanges = req.body;
+      const query = { _id : new ObjectId(productId)};
+      const updatedProduct = {
+        $set : newChanges
+      }
+      const result = await appleCollection.updateOne(query, updatedProduct);
+      res.send(result)
+    })
+
+
+    app.patch('/xiaomi/:id', async (req, res) => {
+      const productId = req.params;
+      const newChanges = req.body;
+      const query = { _id : new ObjectId(productId)};
+      const updatedProduct = {
+        $set : newChanges
+      }
+      const result = await xiaomiCollection.updateOne(query, updatedProduct);
+      res.send(result)
+    })
+
+
+    app.patch('/samsung/:id', async (req, res) => {
+      const productId = req.params;
+      const newChanges = req.body;
+      const query = { _id : new ObjectId(productId)};
+      const updatedProduct = {
+        $set : newChanges
+      }
+      const result = await samsungCollection.updateOne(query, updatedProduct);
+      res.send(result)
+    })
+
+
+    app.patch('/sony/:id', async (req, res) => {
+      const productId = req.params;
+      const newChanges = req.body;
+      const query = { _id : new ObjectId(productId)};
+      const updatedProduct = {
+        $set : newChanges
+      }
+      const result = await sonyCollection.updateOne(query, updatedProduct);
+      res.send(result)
+    })
+
+
+    app.patch('/google/:id', async (req, res) => {
+      const productId = req.params;
+      const newChanges = req.body;
+      const query = { _id : new ObjectId(productId)};
+      const updatedProduct = {
+        $set : newChanges
+      }
+      const result = await googleCollection.updateOne(query, updatedProduct);
+      res.send(result)
+    })
+
+
+    app.patch('/asus/:id', async (req, res) => {
+      const productId = req.params;
+      const newChanges = req.body;
+      const query = { _id : new ObjectId(productId)};
+      const updatedProduct = {
+        $set : newChanges
+      }
+      const result = await asusCollection.updateOne(query, updatedProduct);
+      res.send(result)
+    })
+
     
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
