@@ -175,8 +175,10 @@ async function run() {
     })
 
     // get all items in cartItems
-    app.get('/cart', async (req, res)=> {
-      const foundCartItems = await cartItems.find().toArray();
+    app.get('/cart/:email', async (req, res)=> {
+      const userEmail = req.params.email;
+      const query = { email : userEmail }
+      const foundCartItems = await cartItems.find(query).toArray();
       res.send(foundCartItems)
     })
 
